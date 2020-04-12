@@ -9,5 +9,7 @@ namespace Creature
     {
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         [SerializeField] private NavMeshAgent navMeshAgent;
+
+        public CreatureContext enemy;
     }
 }
