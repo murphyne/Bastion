@@ -10,6 +10,8 @@ namespace Creature.Actions
     public class CreatureActionAttack : CreatureAction,
         IActionEnter<CreatureContext>, IActionExit<CreatureContext>
     {
+        [SerializeField] private CreatureState nextState;
+
         public void Enter(CreatureContext context)
         {
             context.StartCoroutine(Animate(context));
@@ -21,11 +23,17 @@ namespace Creature.Actions
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
-            return null;
+            if (context.isAnimating)
+            {
+                return null;
+            }
+
+            return nextState;
         }
 
         private IEnumerator Animate(CreatureContext context)
         {
+            context.isAnimating = true;
             context.NavMeshAgent.ResetPath();
             context.NavMeshAgent.updateRotation = false;
 
@@ -46,6 +54,7 @@ namespace Creature.Actions
                 yield return null;
             }
 
+            context.isAnimating = false;
             context.NavMeshAgent.updateRotation = true;
         }
     }

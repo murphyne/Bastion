@@ -151,3 +151,4 @@ MonoBehaviour:
   searchRange: 3.6
   lostRange: 4.6
   enemy: {fileID: 0}
+  isAnimating: 0

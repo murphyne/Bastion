@@ -27,6 +27,8 @@ namespace Creature
 
         public CreatureContext enemy;
 
+        public bool isAnimating;
+
         private readonly Color _attackColor = new Color(1f, 0.22f, 0.22f, 0.82f);
         private readonly Color _searchColor = new Color(0f, 0.55f, 0.84f, 0.82f);
         private readonly Color _lostColor = new Color(0.62f, 0.48f, 0.11f, 0.82f);
