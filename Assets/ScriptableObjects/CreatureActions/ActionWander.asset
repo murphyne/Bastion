@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0687f630670649d699357b2895735eb0, type: 3}
   m_Name: ActionWander
   m_EditorClassIdentifier: 
+  nextState: {fileID: 0}

@@ -143,4 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 868832329093266141}
+  searchLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  fieldOfView: 60
+  searchRange: 3.6
   enemy: {fileID: 0}

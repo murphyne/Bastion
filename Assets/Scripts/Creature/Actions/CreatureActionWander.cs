@@ -9,6 +9,8 @@ namespace Creature.Actions
     public class CreatureActionWander : CreatureAction,
         IActionEnter<CreatureContext>, IActionExit<CreatureContext>
     {
+        [SerializeField] private CreatureState nextState;
+
         public void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
@@ -37,6 +39,30 @@ namespace Creature.Actions
                 var targetOffset = Random.onUnitSphere * radius;
                 var targetPosition = position + targetOffset;
                 context.NavMeshAgent.SetDestination(targetPosition);
+            }
+
+            var colliders = Physics.OverlapSphere(position,
+                context.SearchRange, context.SearchLayer);
+            foreach (var collider in colliders)
+            {
+                // Ignore itself.
+                if (collider.gameObject == context.gameObject) continue;
+
+                var colliderPosition = collider.transform.position;
+                var distance = colliderPosition - position;
+
+                // Ignore objects beyond field of view.
+                var angle = Vector3.Angle(context.transform.forward, distance);
+                if (angle > context.FieldOfView / 2) continue;
+
+                // Ignore objects without required context component.
+                Physics.Raycast(position, distance, out var hit);
+                var creatureContext =
+                    hit.collider.gameObject.GetComponent<CreatureContext>();
+                if (!creatureContext) continue;
+
+                context.enemy = creatureContext;
+                return nextState;
             }
 
             return null;
