@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062126218f0448ee945c23130759b951, type: 3}
   m_Name: ActionChase
   m_EditorClassIdentifier: 
+  successState: {fileID: 0}
+  failureState: {fileID: 0}

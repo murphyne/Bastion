@@ -147,5 +147,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   fieldOfView: 60
+  attackRange: 2
   searchRange: 3.6
+  lostRange: 4.6
   enemy: {fileID: 0}
