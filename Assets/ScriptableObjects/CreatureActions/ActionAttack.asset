@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ActionAttack
   m_EditorClassIdentifier: 
   nextState: {fileID: 0}
+  failState: {fileID: 0}

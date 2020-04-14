@@ -11,6 +11,7 @@ namespace Creature.Actions
         IActionEnter<CreatureContext>, IActionExit<CreatureContext>
     {
         [SerializeField] private CreatureState nextState;
+        [SerializeField] private CreatureState failState;
 
         public void Enter(CreatureContext context)
         {
@@ -32,10 +33,10 @@ namespace Creature.Actions
             {
                 return nextState;
             }
-
-            context.StartCoroutine(Animate(context));
-
-            return null;
+            else
+            {
+                return failState;
+            }
         }
 
         private IEnumerator Animate(CreatureContext context)
