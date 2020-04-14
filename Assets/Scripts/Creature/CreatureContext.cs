@@ -51,13 +51,75 @@ namespace Creature
 
         private void OnDrawGizmos()
         {
+            DrawFovGizmos();
+            DrawRangesGizmos();
+            DrawDistanceGizmos();
+        }
+
+        private void DrawFovGizmos()
+        {
             var position = transform.position;
-            Gizmos.color = _attackColor;
-            Gizmos.DrawWireSphere(position, attackRange);
+            var forward = transform.forward;
+
+            var sideL = Quaternion.Euler(0f, -fieldOfView / 2, 0f) * forward;
+            var sideR = Quaternion.Euler(0f, fieldOfView / 2, 0f) * forward;
+
+            var attackL = position + sideL * attackRange;
+            var attackR = position + sideR * attackRange;
+            var searchL = position + sideL * searchRange;
+            var searchR = position + sideR * searchRange;
+            // var lostL = position + sideL * lostRange;
+            // var lostR = position + sideR * lostRange;
+
+            // Gizmos.color = _attackColor;
+            // Gizmos.DrawLine(position, attackL);
+            // Gizmos.DrawLine(position, attackR);
             Gizmos.color = _searchColor;
-            Gizmos.DrawWireSphere(position, searchRange);
-            Gizmos.color = _lostColor;
-            Gizmos.DrawWireSphere(position, lostRange);
+            Gizmos.DrawLine(attackL, searchL);
+            Gizmos.DrawLine(attackR, searchR);
+            // Gizmos.color = _lostColor;
+            // Gizmos.DrawLine(searchL, lostL);
+            // Gizmos.DrawLine(searchR, lostR);
+        }
+
+        private void DrawRangesGizmos()
+        {
+            var position = transform.position;
+            var forward = transform.forward;
+
+            const float interval = 15f;
+            for (float angle = interval; angle <= 360f; angle += interval)
+            {
+                var vectorA = Quaternion.Euler(0f, angle, 0f) * forward;
+                var vectorZ = Quaternion.Euler(0f, angle - interval, 0f) * forward;
+
+                Gizmos.color = _attackColor;
+                Gizmos.DrawLine(position + vectorA * attackRange, position + vectorZ * attackRange);
+                Gizmos.color = _searchColor;
+                Gizmos.DrawLine(position + vectorA * searchRange, position + vectorZ * searchRange);
+                Gizmos.color = _lostColor;
+                Gizmos.DrawLine(position + vectorA * lostRange, position + vectorZ * lostRange);
+            }
+        }
+
+        private void DrawDistanceGizmos()
+        {
+            if (enemy == null) return;
+
+            var position = transform.position;
+            var enemyPosition = enemy.transform.position;
+            var enemyDistance = enemyPosition - position;
+
+            if (enemyDistance.sqrMagnitude < attackRange * attackRange)
+                Gizmos.color = _attackColor;
+            else if (enemyDistance.sqrMagnitude < searchRange * searchRange)
+                Gizmos.color = _searchColor;
+            else if (enemyDistance.sqrMagnitude < lostRange * lostRange)
+                Gizmos.color = _lostColor;
+            else
+                Gizmos.color = Color.white;
+
+            Gizmos.DrawLine(position, enemyPosition);
         }
     }
 }
