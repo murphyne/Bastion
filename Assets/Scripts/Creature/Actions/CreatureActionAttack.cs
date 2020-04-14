@@ -28,7 +28,14 @@ namespace Creature.Actions
                 return null;
             }
 
-            return nextState;
+            if (context.enemy == null || context.enemy.Health <= 0)
+            {
+                return nextState;
+            }
+
+            context.StartCoroutine(Animate(context));
+
+            return null;
         }
 
         private IEnumerator Animate(CreatureContext context)
@@ -38,12 +45,14 @@ namespace Creature.Actions
             context.NavMeshAgent.updateRotation = false;
 
             const float duration = 0.6f;
+            const float hitThreshold = 0.6f;
             var initialAngle = context.transform.localRotation.eulerAngles.y;
             var targetAngle = initialAngle + 360f;
 
             for (var time = 0f; time < duration; time += Time.deltaTime)
             {
                 var progress = time / duration;
+                var deltaProgress = Time.deltaTime / duration;
                 var blendedProgress = -(Mathf.Cos(Mathf.PI * progress) - 1) / 2;
 
                 var newAngle = Mathf.Lerp(initialAngle, targetAngle, blendedProgress);
@@ -51,6 +60,11 @@ namespace Creature.Actions
                 var deltaAngle = newAngle - currentAngle;
 
                 context.transform.Rotate(Vector3.up, deltaAngle);
+
+                if (progress >= hitThreshold && progress - deltaProgress < hitThreshold)
+                {
+                    context.enemy.TakeDamage(context.Damage);
+                }
                 yield return null;
             }
 

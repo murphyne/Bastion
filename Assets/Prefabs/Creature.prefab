@@ -150,5 +150,7 @@ MonoBehaviour:
   attackRange: 2
   searchRange: 3.6
   lostRange: 4.6
+  health: 10
+  damage: 10
   enemy: {fileID: 0}
   isAnimating: 0
