@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631c733c10fc4b18a112625a557a9574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 0}
+  currentState: {fileID: 11400000, guid: f9be97c3bc4ec5742b3fb3b8c1016dec, type: 2}
   context: {fileID: 868832329093266129}
 --- !u!114 &868832329093266129
 MonoBehaviour:

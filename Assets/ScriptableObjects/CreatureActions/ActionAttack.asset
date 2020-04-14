@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f0f039421945b18a71a34b74d865bf, type: 3}
   m_Name: ActionAttack
   m_EditorClassIdentifier: 
-  nextState: {fileID: 0}
-  failState: {fileID: 0}
+  nextState: {fileID: 11400000, guid: f9be97c3bc4ec5742b3fb3b8c1016dec, type: 2}
+  failState: {fileID: 11400000, guid: ebfbdef9edc5c5d4088af9ced67bef00, type: 2}
