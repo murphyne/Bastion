@@ -45,10 +45,19 @@ namespace Creature.Actions
             context.NavMeshAgent.ResetPath();
             context.NavMeshAgent.updateRotation = false;
 
+            // Choose direction of rotation.
+            var position = context.transform.position;
+            var enemyPosition = context.enemy.transform.position;
+            var offset = enemyPosition - position;
+            var direction = Vector3.Dot(context.transform.right, offset);
+            direction = direction == 0f
+                ? Random.value > 0.5f ? 1f : -1f
+                : Mathf.Sign(direction);
+
             const float duration = 0.6f;
             const float hitThreshold = 0.6f;
             var initialAngle = context.transform.localRotation.eulerAngles.y;
-            var targetAngle = initialAngle + 360f;
+            var targetAngle = initialAngle + 360f * direction;
 
             for (var time = 0f; time < duration; time += Time.deltaTime)
             {
