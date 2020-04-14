@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 868832329093266141}
   - component: {fileID: 868832329093266128}
   - component: {fileID: 868832329093266129}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Creature
-  m_TagString: Untagged
+  m_TagString: Creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,3 +116,41 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &868832329093266128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868832329093266140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631c733c10fc4b18a112625a557a9574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: f9be97c3bc4ec5742b3fb3b8c1016dec, type: 2}
+  context: {fileID: 868832329093266129}
+--- !u!114 &868832329093266129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868832329093266140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f74d7e36187d674f864986d01e26d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 868832329093266141}
+  searchLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  fieldOfView: 60
+  attackRange: 2
+  searchRange: 3.6
+  lostRange: 4.6
+  health: 10
+  damage: 10
+  enemy: {fileID: 0}
+  isAnimating: 0
