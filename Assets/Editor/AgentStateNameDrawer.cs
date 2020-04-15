@@ -10,7 +10,9 @@ namespace Editor
         private static void DrawAgentStateName(CreatureAgent agent, GizmoType gizmoType)
         {
             var agentState = agent.CurrentState as ScriptableObject;
-            var agentStateName = $" {agentState.name.Trim()}";
+            var agentStateName = agentState == null
+                ? " [null]"
+                : $" {agentState.name.Trim()}";
             var guiContent = new GUIContent(agentStateName);
             var guiStyle = new GUIStyle(GUI.skin.label);
 
