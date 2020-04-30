@@ -6,7 +6,7 @@ namespace Creature
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(NavMeshAgent))]
-    public sealed class CreatureContext : MonoContext
+    public sealed class CreatureContext : MonoContext<CreatureContext>
     {
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         [SerializeField] private NavMeshAgent navMeshAgent;
