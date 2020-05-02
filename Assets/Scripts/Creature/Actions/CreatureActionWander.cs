@@ -9,6 +9,11 @@ namespace Creature.Actions
     public class CreatureActionWander : CreatureAction,
         IActionEnter<CreatureContext>, IActionExit<CreatureContext>
     {
+        void IActionEnter.Enter(IContext context) =>
+            Enter((CreatureContext) context);
+        void IActionExit.Exit(IContext context) =>
+            Exit((CreatureContext) context);
+
         [SerializeField] private CreatureState nextState;
 
         public void Enter(CreatureContext context)
