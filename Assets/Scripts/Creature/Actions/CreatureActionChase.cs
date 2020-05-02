@@ -9,6 +9,11 @@ namespace Creature.Actions
     public class CreatureActionChase : CreatureAction,
         IActionEnter<CreatureContext>, IActionExit<CreatureContext>
     {
+        void IActionEnter.Enter(IContext context) =>
+            Enter((CreatureContext) context);
+        void IActionExit.Exit(IContext context) =>
+            Exit((CreatureContext) context);
+
         [SerializeField] private CreatureState successState;
         [SerializeField] private CreatureState failureState;
 

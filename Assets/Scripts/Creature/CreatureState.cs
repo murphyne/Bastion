@@ -10,6 +10,8 @@ namespace Creature
     public class CreatureState : ScriptableState<CreatureContext>,
         IStatePluggable<CreatureContext>
     {
+        IEnumerable<IAction> IStatePluggable.Actions => actions;
+
         public IEnumerable<IAction<CreatureContext>> Actions => actions;
         [SerializeField] private CreatureAction[] actions;
 

@@ -1,59 +1,48 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace FSM
 {
-    public interface IContext<TContext>
-        where TContext : IContext<TContext> { }
+    public interface IContext { }
 
-    public interface IContext : IContext<IContext> { }
-
-    public interface IState<in TContext>
-        where TContext : IContext
+    public interface IState
     {
-        IState<TContext> Handle(TContext context);
+        IState Handle(IContext context);
     }
 
-    public interface IStateEnter<in TContext>
-        where TContext : IContext
+    public interface IStateEnter
     {
-        void Enter(TContext context);
+        void Enter(IContext context);
     }
 
-    public interface IStateExit<in TContext>
-        where TContext : IContext
+    public interface IStateExit
     {
-        void Exit(TContext context);
+        void Exit(IContext context);
     }
 
-    public interface IAgent<TContext>
-        where TContext : IContext
+    public interface IAgent
     {
-        IState<TContext> CurrentState { get; }
+        IState CurrentState { get; }
 
-        void SetState(IState<TContext> newState);
+        void SetState(IState newState);
     }
 
-    public interface IStatePluggable<in TContext> : IState<TContext>
-        where TContext : IContext
+    public interface IStatePluggable : IState
     {
-        IEnumerable<IAction<TContext>> Actions { get; }
+        IEnumerable<IAction> Actions { get; }
     }
 
-    public interface IAction<in TContext>
-        where TContext : IContext
+    public interface IAction
     {
-        IState<TContext> Apply(TContext context);
+        IState Apply(IContext context);
     }
 
-    public interface IActionEnter<in TContext> : IAction<TContext>
-        where TContext : IContext
+    public interface IActionEnter : IAction
     {
-        void Enter(TContext context);
+        void Enter(IContext context);
     }
 
-    public interface IActionExit<in TContext> : IAction<TContext>
-        where TContext : IContext
+    public interface IActionExit : IAction
     {
-        void Exit(TContext context);
+        void Exit(IContext context);
     }
 }
