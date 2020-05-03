@@ -1,31 +1,35 @@
-using Creature;
+using FSM;
 using UnityEditor;
 using UnityEngine;
 
 namespace Editor
 {
-    public static class AgentStateNameDrawer
+    [CustomEditor(typeof(IAgent))]
+    public class AgentStateNameDrawer : UnityEditor.Editor
     {
         [DrawGizmo(GizmoType.Selected | GizmoType.Active)]
-        private static void DrawAgentStateName(CreatureAgent agent, GizmoType gizmoType)
+        private static void DrawAgentStateName(MonoBehaviour monoBehaviour, GizmoType gizmoType)
         {
-            var agentState = agent.CurrentState as ScriptableObject;
-            var agentStateName = agentState == null
-                ? " [null]"
-                : $" {agentState.name.Trim()}";
-            var guiContent = new GUIContent(agentStateName);
-            var guiStyle = new GUIStyle(GUI.skin.label);
+            if (monoBehaviour is IAgent agent)
+            {
+                var agentState = agent.CurrentState as ScriptableObject;
+                var agentStateName = agentState == null
+                    ? " [null]"
+                    : $" {agentState.name.Trim()}";
+                var guiContent = new GUIContent(agentStateName);
+                var guiStyle = new GUIStyle(GUI.skin.label);
 
-            var hashCode = ComputeHashFromString(agentStateName);
-            var backgroundColor = ComputeColorFromHash(hashCode);
-            var textColor = ComputeContrastColor(backgroundColor);
-            GUI.backgroundColor = backgroundColor;
-            guiStyle.normal.textColor = textColor;
+                var hashCode = ComputeHashFromString(agentStateName);
+                var backgroundColor = ComputeColorFromHash(hashCode);
+                var textColor = ComputeContrastColor(backgroundColor);
+                GUI.backgroundColor = backgroundColor;
+                guiStyle.normal.textColor = textColor;
 
-            var agentPosition = agent.transform.position;
-            var gizmoPosition = agentPosition + Vector3.up * 0.7f;
+                var agentPosition = monoBehaviour.transform.position;
+                var gizmoPosition = agentPosition + Vector3.up * 0.7f;
 
-            DrawLabel(gizmoPosition, guiContent, guiStyle);
+                DrawLabel(gizmoPosition, guiContent, guiStyle);
+            }
         }
 
         private static int ComputeHashFromString(string name)
