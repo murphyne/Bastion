@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Editor
 {
-    public static class AgentStateNameDrawer
+    [CustomEditor(typeof(IAgent))]
+    public class AgentStateNameDrawer : UnityEditor.Editor
     {
         [DrawGizmo(GizmoType.Selected | GizmoType.Active)]
         private static void DrawAgentStateName(MonoBehaviour monoBehaviour, GizmoType gizmoType)
