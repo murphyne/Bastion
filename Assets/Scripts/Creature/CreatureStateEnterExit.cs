@@ -9,6 +9,11 @@ namespace Creature
     public sealed class CreatureStateEnterExit : CreatureState,
         IStateEnter<CreatureContext>, IStateExit<CreatureContext>
     {
+        void IStateEnter.Enter(IContext context) =>
+            Enter((CreatureContext) context);
+        void IStateExit.Exit(IContext context) =>
+            Exit((CreatureContext) context);
+
         public void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
