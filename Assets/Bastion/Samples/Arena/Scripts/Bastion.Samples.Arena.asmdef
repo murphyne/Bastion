@@ -1,0 +1,14 @@
+{
+    "name": "Bastion.Samples.Arena",
+    "references": [
+        "Bastion"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

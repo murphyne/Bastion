@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Bastion/Scenes/SampleScene.unity
+    path: Assets/Bastion/Samples/Arena/Scenes/SampleScene.unity
     guid: d9c6020205494e047b75b7bd77434ef8
   m_configObjects: {}
