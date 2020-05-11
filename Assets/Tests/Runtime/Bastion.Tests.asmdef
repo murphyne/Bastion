@@ -1,14 +1,12 @@
 {
-    "name": "TestsEditor",
+    "name": "Bastion.Tests",
     "references": [
-        "ScriptsGame"
+        "Bastion"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

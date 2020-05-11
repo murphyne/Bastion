@@ -1,11 +1,7 @@
 {
-    "name": "TestsRuntime",
-    "references": [
-        "ScriptsGame"
-    ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
-    ],
+    "name": "Bastion",
+    "references": [],
+    "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
