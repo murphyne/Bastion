@@ -1,4 +1,4 @@
-using FSM;
+using Bastion.FSM;
 using UnityEditor;
 using UnityEngine;
 

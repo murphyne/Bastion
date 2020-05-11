@@ -1,7 +1,7 @@
-﻿using FSM;
+﻿using Bastion.FSM;
 using UnityEngine;
 
-namespace Creature
+namespace Arena.Creature
 {
     [RequireComponent(typeof(CreatureContext))]
     public sealed class CreatureAgent : MonoAgent<CreatureContext>

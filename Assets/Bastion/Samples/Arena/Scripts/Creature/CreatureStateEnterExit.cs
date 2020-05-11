@@ -1,7 +1,7 @@
-﻿using FSM;
+﻿using Bastion.FSM;
 using UnityEngine;
 
-namespace Creature
+namespace Arena.Creature
 {
     [CreateAssetMenu(order = 2,
         fileName = "CreatureStateEnterExit",
