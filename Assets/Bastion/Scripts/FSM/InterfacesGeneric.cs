@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FSM
+namespace Bastion.FSM
 {
     // https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern
     // https://ericlippert.com/2011/02/02/curiouser-and-curiouser/

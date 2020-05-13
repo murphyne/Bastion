@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FSM
+namespace Bastion.FSM
 {
     public abstract class MonoContext<TContext>
         : MonoBehaviour, IContext<TContext>

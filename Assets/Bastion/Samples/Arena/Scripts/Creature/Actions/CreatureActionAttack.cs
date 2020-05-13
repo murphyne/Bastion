@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using FSM;
+using Bastion.FSM;
 using UnityEngine;
 
-namespace Creature.Actions
+namespace Arena.Creature.Actions
 {
     [CreateAssetMenu(order = 103,
         fileName = "CreatureActionAttack",

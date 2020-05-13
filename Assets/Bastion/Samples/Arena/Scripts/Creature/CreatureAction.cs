@@ -1,6 +1,6 @@
-﻿using FSM;
+﻿using Bastion.FSM;
 
-namespace Creature
+namespace Arena.Creature
 {
     public abstract class CreatureAction : ScriptableAction<CreatureContext> { }
 }

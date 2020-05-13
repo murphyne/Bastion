@@ -1,8 +1,8 @@
-using FSM;
+using Bastion.FSM;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Creature
+namespace Arena.Creature
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(NavMeshAgent))]

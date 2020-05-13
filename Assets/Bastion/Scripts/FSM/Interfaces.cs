@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace FSM
+namespace Bastion.FSM
 {
     public interface IContext { }
 
