@@ -23,13 +23,13 @@ namespace Arena.Creature
             if (currentState != null) currentState.Enter(context);
         }
 
-        private new void Start()
+        protected override void Start()
         {
             context = GetComponent<CreatureContext>();
             SetState(CurrentState);
         }
 
-        private new void Update()
+        protected override void Update()
         {
             // Debug.Log($"{this}.{nameof(Update)}()");
 

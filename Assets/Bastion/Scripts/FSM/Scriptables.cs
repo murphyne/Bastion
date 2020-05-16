@@ -33,12 +33,12 @@ namespace Bastion.FSM
 
         public abstract void SetState(IState<TContext> newState);
 
-        protected void Start()
+        protected virtual void Start()
         {
             SetState(CurrentState);
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             var newState = CurrentState?.Handle(Context);
             if (newState != null)
