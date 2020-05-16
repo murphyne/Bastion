@@ -26,9 +26,7 @@ namespace Arena.Creature
                 }
             }
 
-            (currentState as CreatureStateEnterExit)?.Exit(context);
             currentState = newState as CreatureState;
-            (currentState as CreatureStateEnterExit)?.Enter(context);
 
             if (currentState != null && currentState.Actions != null)
             {
