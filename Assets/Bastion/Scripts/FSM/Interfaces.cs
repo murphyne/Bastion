@@ -13,8 +13,8 @@ namespace Bastion.FSM
 
     public interface IAgent
     {
+        IContext Context { get; }
         IState CurrentState { get; }
-
         void SetState(IState newState);
     }
 

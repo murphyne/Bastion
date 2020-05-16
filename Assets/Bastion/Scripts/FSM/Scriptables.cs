@@ -23,6 +23,7 @@ namespace Bastion.FSM
         : MonoBehaviour, IAgent<TContext>
         where TContext : IContext<TContext>
     {
+        IContext IAgent.Context => Context;
         IState IAgent.CurrentState => CurrentState;
         void IAgent.SetState(IState newState) =>
             SetState((IState<TContext>) newState);

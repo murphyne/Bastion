@@ -19,8 +19,8 @@ namespace Bastion.FSM
     public interface IAgent<TContext> : IAgent
         where TContext : IContext<TContext>
     {
+        new TContext Context { get; }
         new IState<TContext> CurrentState { get; }
-
         void SetState(IState<TContext> newState);
     }
 
