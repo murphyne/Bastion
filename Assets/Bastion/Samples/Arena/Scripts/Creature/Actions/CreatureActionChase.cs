@@ -6,18 +6,12 @@ namespace Arena.Creature.Actions
     [CreateAssetMenu(order = 102,
         fileName = "CreatureActionChase",
         menuName = "Creature/Action Chase")]
-    public class CreatureActionChase : CreatureAction,
-        IActionEnter<CreatureContext>, IActionExit<CreatureContext>
+    public class CreatureActionChase : CreatureAction
     {
-        void IActionEnter.Enter(IContext context) =>
-            Enter((CreatureContext) context);
-        void IActionExit.Exit(IContext context) =>
-            Exit((CreatureContext) context);
-
         [SerializeField] private CreatureState successState;
         [SerializeField] private CreatureState failureState;
 
-        public void Enter(CreatureContext context)
+        public override void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
 
@@ -25,7 +19,7 @@ namespace Arena.Creature.Actions
             context.NavMeshAgent.SetDestination(enemyPosition);
         }
 
-        public void Exit(CreatureContext context)
+        public override void Exit(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Exit)}({context})");
 

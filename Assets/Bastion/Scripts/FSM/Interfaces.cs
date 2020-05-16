@@ -7,15 +7,7 @@ namespace Bastion.FSM
     public interface IState
     {
         IState Handle(IContext context);
-    }
-
-    public interface IStateEnter
-    {
         void Enter(IContext context);
-    }
-
-    public interface IStateExit
-    {
         void Exit(IContext context);
     }
 
@@ -34,15 +26,7 @@ namespace Bastion.FSM
     public interface IAction
     {
         IState Apply(IContext context);
-    }
-
-    public interface IActionEnter : IAction
-    {
         void Enter(IContext context);
-    }
-
-    public interface IActionExit : IAction
-    {
         void Exit(IContext context);
     }
 }

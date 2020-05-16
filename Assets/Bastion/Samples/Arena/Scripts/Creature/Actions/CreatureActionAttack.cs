@@ -7,23 +7,17 @@ namespace Arena.Creature.Actions
     [CreateAssetMenu(order = 103,
         fileName = "CreatureActionAttack",
         menuName = "Creature/Action Attack")]
-    public class CreatureActionAttack : CreatureAction,
-        IActionEnter<CreatureContext>, IActionExit<CreatureContext>
+    public class CreatureActionAttack : CreatureAction
     {
-        void IActionEnter.Enter(IContext context) =>
-            Enter((CreatureContext) context);
-        void IActionExit.Exit(IContext context) =>
-            Exit((CreatureContext) context);
-
         [SerializeField] private CreatureState nextState;
         [SerializeField] private CreatureState failState;
 
-        public void Enter(CreatureContext context)
+        public override void Enter(CreatureContext context)
         {
             context.StartCoroutine(Animate(context));
         }
 
-        public void Exit(CreatureContext context) { }
+        public override void Exit(CreatureContext context) { }
 
         public override IState<CreatureContext> Apply(CreatureContext context)
         {

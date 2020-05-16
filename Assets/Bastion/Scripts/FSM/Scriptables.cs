@@ -11,8 +11,12 @@ namespace Bastion.FSM
         where TContext : IContext<TContext>
     {
         IState IState.Handle(IContext context) => Handle((TContext) context);
+        void IState.Enter(IContext context) => Enter((TContext) context);
+        void IState.Exit(IContext context) => Exit((TContext) context);
 
         public abstract IState<TContext> Handle(TContext context);
+        public virtual void Enter(TContext context) { }
+        public virtual void Exit(TContext context) { }
     }
 
     public abstract class MonoAgent<TContext>
@@ -48,7 +52,11 @@ namespace Bastion.FSM
         where TContext : IContext<TContext>
     {
         IState IAction.Apply(IContext context) => Apply((TContext) context);
+        void IAction.Enter(IContext context) => Enter((TContext) context);
+        void IAction.Exit(IContext context) => Exit((TContext) context);
 
         public abstract IState<TContext> Apply(TContext context);
+        public virtual void Enter(TContext context) { }
+        public virtual void Exit(TContext context) { }
     }
 }
