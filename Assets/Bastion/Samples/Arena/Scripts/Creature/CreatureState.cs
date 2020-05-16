@@ -33,5 +33,31 @@ namespace Arena.Creature
 
             return null;
         }
+
+        public override void Enter(CreatureContext context)
+        {
+            // Debug.Log($"{this}.{nameof(Enter)}({context})");
+
+            if (Actions != null)
+            {
+                foreach (var action in Actions)
+                {
+                    action?.Enter(context);
+                }
+            }
+        }
+
+        public override void Exit(CreatureContext context)
+        {
+            // Debug.Log($"{this}.{nameof(Exit)}({context})");
+
+            if (Actions != null)
+            {
+                foreach (var action in Actions)
+                {
+                    action?.Exit(context);
+                }
+            }
+        }
     }
 }

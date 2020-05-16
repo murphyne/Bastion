@@ -6,22 +6,16 @@ namespace Arena.Creature.Actions
     [CreateAssetMenu(order = 101,
         fileName = "CreatureActionWander",
         menuName = "Creature/Action Wander")]
-    public class CreatureActionWander : CreatureAction,
-        IActionEnter<CreatureContext>, IActionExit<CreatureContext>
+    public class CreatureActionWander : CreatureAction
     {
-        void IActionEnter.Enter(IContext context) =>
-            Enter((CreatureContext) context);
-        void IActionExit.Exit(IContext context) =>
-            Exit((CreatureContext) context);
-
         [SerializeField] private CreatureState nextState;
 
-        public void Enter(CreatureContext context)
+        public override void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
         }
 
-        public void Exit(CreatureContext context)
+        public override void Exit(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Exit)}({context})");
 

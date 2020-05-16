@@ -18,34 +18,18 @@ namespace Arena.Creature
 
             if (newState == null) return;
 
-            if (currentState != null && currentState.Actions != null)
-            {
-                foreach (var action in currentState.Actions)
-                {
-                    (action as IActionExit<CreatureContext>)?.Exit(context);
-                }
-            }
-
-            (currentState as CreatureStateEnterExit)?.Exit(context);
+            if (currentState != null) currentState.Exit(context);
             currentState = newState as CreatureState;
-            (currentState as CreatureStateEnterExit)?.Enter(context);
-
-            if (currentState != null && currentState.Actions != null)
-            {
-                foreach (var action in currentState.Actions)
-                {
-                    (action as IActionEnter<CreatureContext>)?.Enter(context);
-                }
-            }
+            if (currentState != null) currentState.Enter(context);
         }
 
-        private new void Start()
+        protected override void Start()
         {
             context = GetComponent<CreatureContext>();
             SetState(CurrentState);
         }
 
-        private new void Update()
+        protected override void Update()
         {
             // Debug.Log($"{this}.{nameof(Update)}()");
 

@@ -7,22 +7,14 @@ namespace Bastion.FSM
     public interface IState
     {
         IState Handle(IContext context);
-    }
-
-    public interface IStateEnter
-    {
         void Enter(IContext context);
-    }
-
-    public interface IStateExit
-    {
         void Exit(IContext context);
     }
 
     public interface IAgent
     {
+        IContext Context { get; }
         IState CurrentState { get; }
-
         void SetState(IState newState);
     }
 
@@ -34,15 +26,7 @@ namespace Bastion.FSM
     public interface IAction
     {
         IState Apply(IContext context);
-    }
-
-    public interface IActionEnter : IAction
-    {
         void Enter(IContext context);
-    }
-
-    public interface IActionExit : IAction
-    {
         void Exit(IContext context);
     }
 }
