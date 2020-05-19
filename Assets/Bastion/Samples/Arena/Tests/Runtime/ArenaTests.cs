@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Arena.Creature;
+using Bastion.FSM;
+using HarmonyLib;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -17,6 +19,17 @@ namespace Bastion.Samples.Arena.Tests
         [UnityTest]
         public IEnumerator SetState_Called_Just_Enough_Times()
         {
+            Debug.Log("Before Harmony");
+
+            var harmony = new Harmony("com.example.patch");
+            var processor = harmony.CreateClassProcessor(typeof(PatchCreatureAgent));
+            processor.Patch();
+
+            Assert.IsNotEmpty(harmony.GetPatchedMethods());
+
+            var callCount = 0;
+            PatchCreatureAgent.Event += (newState) => callCount++;
+
             Debug.Log("Before Plane");
 
             var planeGameObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -128,6 +141,8 @@ namespace Bastion.Samples.Arena.Tests
 
             yield return new WaitForSeconds(2.5f);
 
+            Assert.AreEqual(4, callCount);
+
             Debug.Log("Before Cleanup");
 
             GameObject.Destroy(aGameObject);
@@ -136,6 +151,7 @@ namespace Bastion.Samples.Arena.Tests
             GameObject.Destroy(cameraGameObject);
             NavMesh.RemoveNavMeshData(navMeshDataInstance);
             GameObject.Destroy(planeGameObject);
+            harmony.UnpatchAll();
         }
 
         private static FieldInfo GetPropertyField(object obj, string propertyName)
@@ -178,6 +194,25 @@ namespace Bastion.Samples.Arena.Tests
                 Vector3.zero,
                 Quaternion.identity);
             return data;
+        }
+
+        [HarmonyPatch(typeof(CreatureAgent), nameof(CreatureAgent.SetState))]
+        [HarmonyPatch(new[] {typeof(IState<CreatureContext>)})]
+        private class PatchCreatureAgent
+        {
+            public static event System.Action<IState<CreatureContext>> Event;
+
+            [HarmonyCleanup]
+            private static void Cleanup()
+            {
+                Event= null;
+            }
+
+            [HarmonyPatch(new[] {typeof(IState<CreatureContext>)})]
+            private static void Prefix(IState<CreatureContext> newState)
+            {
+                Event?.Invoke(newState);
+            }
         }
     }
 }
