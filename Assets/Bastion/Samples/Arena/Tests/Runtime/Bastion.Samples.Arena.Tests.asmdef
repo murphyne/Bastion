@@ -1,0 +1,17 @@
+{
+    "name": "Bastion.Samples.Arena.Tests",
+    "references": [
+        "Bastion",
+        "Bastion.Samples.Arena"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
