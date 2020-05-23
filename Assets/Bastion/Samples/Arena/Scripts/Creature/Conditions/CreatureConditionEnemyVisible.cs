@@ -1,7 +1,12 @@
 ﻿namespace Arena.Creature.Conditions
 {
-    public class CreatureConditionEnemyVisible
+    public class CreatureConditionEnemyVisible : CreatureCondition
     {
+        public override bool Check(CreatureContext context)
+        {
+            return CheckStatic(context);
+        }
+
         public static bool CheckStatic(CreatureContext context)
         {
             var position = context.NavMeshAgent.transform.position;
