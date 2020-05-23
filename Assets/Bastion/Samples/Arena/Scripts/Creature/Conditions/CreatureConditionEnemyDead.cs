@@ -9,14 +9,9 @@ namespace Arena.Creature.Conditions
     {
         public override bool Check(CreatureContext context)
         {
-            if (context.enemy == null || context.enemy.Health <= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (context.enemy == null) return true;
+            if (context.enemy.Health <= 0) return true;
+            return false;
         }
     }
 }

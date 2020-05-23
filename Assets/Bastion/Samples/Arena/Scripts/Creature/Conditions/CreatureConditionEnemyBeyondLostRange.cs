@@ -12,13 +12,9 @@ namespace Arena.Creature.Conditions
             var position = context.transform.position;
             var enemyPosition = context.enemy.transform.position;
             var distance = enemyPosition - position;
-
-            if (distance.sqrMagnitude > context.LostRange * context.LostRange)
-            {
-                return true;
-            }
-
-            return false;
+            var lostRangeSquare = context.LostRange * context.LostRange;
+            var beyondRange = distance.sqrMagnitude > lostRangeSquare;
+            return beyondRange;
         }
     }
 }
