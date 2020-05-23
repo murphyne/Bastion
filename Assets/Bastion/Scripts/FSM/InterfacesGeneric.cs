@@ -37,4 +37,18 @@ namespace Bastion.FSM
         void Enter(TContext context);
         void Exit(TContext context);
     }
+
+    public interface ICondition<in TContext> : ICondition
+        where TContext : IContext<TContext>
+    {
+        bool Check(TContext context);
+    }
+
+    public interface ITransition<in TContext> : ITransition
+        where TContext : IContext<TContext>
+    {
+        new ICondition<TContext> Condition { get; }
+        new IState<TContext> NextState { get; }
+        IState<TContext> Check(TContext context);
+    }
 }

@@ -29,4 +29,16 @@ namespace Bastion.FSM
         void Enter(IContext context);
         void Exit(IContext context);
     }
+
+    public interface ICondition
+    {
+        bool Check(IContext context);
+    }
+
+    public interface ITransition
+    {
+        ICondition Condition { get; }
+        IState NextState { get; }
+        IState Check(IContext context);
+    }
 }
