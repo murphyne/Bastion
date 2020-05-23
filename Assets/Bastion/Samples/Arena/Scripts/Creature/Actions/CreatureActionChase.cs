@@ -1,4 +1,5 @@
-﻿using Bastion.FSM;
+﻿using Arena.Creature.Conditions;
+using Bastion.FSM;
 using UnityEngine;
 
 namespace Arena.Creature.Actions
@@ -30,16 +31,14 @@ namespace Arena.Creature.Actions
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
-            var position = context.transform.position;
             var enemyPosition = context.enemy.transform.position;
-            var distance = enemyPosition - position;
 
-            if (distance.sqrMagnitude > context.LostRange * context.LostRange)
+            if (CreatureConditionEnemyBeyondLostRange.CheckStatic(context))
             {
                 return failureState;
             }
 
-            if (distance.sqrMagnitude < context.AttackRange * context.AttackRange)
+            if (CreatureConditionEnemyWithinAttackRange.CheckStatic(context))
             {
                 return successState;
             }

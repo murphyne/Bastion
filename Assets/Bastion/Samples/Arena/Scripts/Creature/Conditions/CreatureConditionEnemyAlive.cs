@@ -4,7 +4,14 @@
     {
         public static bool CheckStatic(CreatureContext context)
         {
-            return false;
+            if (context.enemy == null || context.enemy.Health <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

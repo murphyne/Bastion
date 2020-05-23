@@ -4,7 +4,7 @@
     {
         public static bool CheckStatic(CreatureContext context)
         {
-            return false;
+            return context.isAnimating;
         }
     }
 }

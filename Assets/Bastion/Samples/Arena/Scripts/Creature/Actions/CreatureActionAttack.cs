@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Arena.Creature.Conditions;
 using Bastion.FSM;
 using UnityEngine;
 
@@ -23,19 +24,21 @@ namespace Arena.Creature.Actions
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
-            if (context.isAnimating)
+            if (CreatureConditionIsAnimating.CheckStatic(context))
             {
                 return null;
             }
 
-            if (context.enemy == null || context.enemy.Health <= 0)
+            if (CreatureConditionEnemyDead.CheckStatic(context))
             {
                 return nextState;
             }
-            else
+            if (CreatureConditionEnemyAlive.CheckStatic(context))
             {
                 return failState;
             }
+
+            return null;
         }
 
         private IEnumerator Animate(CreatureContext context)

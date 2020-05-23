@@ -1,4 +1,5 @@
-﻿using Bastion.FSM;
+﻿using Arena.Creature.Conditions;
+using Bastion.FSM;
 using UnityEngine;
 
 namespace Arena.Creature.Actions
@@ -40,27 +41,8 @@ namespace Arena.Creature.Actions
                 context.NavMeshAgent.SetDestination(targetPosition);
             }
 
-            var colliders = Physics.OverlapSphere(position,
-                context.SearchRange, context.SearchLayer);
-            foreach (var collider in colliders)
+            if (CreatureConditionEnemyVisible.CheckStatic(context))
             {
-                // Ignore itself.
-                if (collider.gameObject == context.gameObject) continue;
-
-                var colliderPosition = collider.transform.position;
-                var distance = colliderPosition - position;
-
-                // Ignore objects beyond field of view.
-                var angle = Vector3.Angle(context.transform.forward, distance);
-                if (angle > context.FieldOfView / 2) continue;
-
-                // Ignore objects without required context component.
-                Physics.Raycast(position, distance, out var hit);
-                var creatureContext =
-                    hit.collider.gameObject.GetComponent<CreatureContext>();
-                if (!creatureContext) continue;
-
-                context.enemy = creatureContext;
                 return nextState;
             }
 
