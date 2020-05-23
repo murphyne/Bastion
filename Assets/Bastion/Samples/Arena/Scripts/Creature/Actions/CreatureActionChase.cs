@@ -1,6 +1,4 @@
-﻿using Arena.Creature.Conditions;
-using Bastion.FSM;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Arena.Creature.Actions
 {
@@ -9,9 +7,6 @@ namespace Arena.Creature.Actions
         menuName = "Creature/Action Chase")]
     public class CreatureActionChase : CreatureAction
     {
-        [SerializeField] private CreatureState successState;
-        [SerializeField] private CreatureState failureState;
-
         public override void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
@@ -27,25 +22,12 @@ namespace Arena.Creature.Actions
             context.NavMeshAgent.ResetPath();
         }
 
-        public override IState<CreatureContext> Apply(CreatureContext context)
+        public override void Apply(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
             var enemyPosition = context.enemy.transform.position;
-
-            if (CreatureConditionEnemyBeyondLostRange.CheckStatic(context))
-            {
-                return failureState;
-            }
-
-            if (CreatureConditionEnemyWithinAttackRange.CheckStatic(context))
-            {
-                return successState;
-            }
-
             context.NavMeshAgent.SetDestination(enemyPosition);
-
-            return null;
         }
     }
 }

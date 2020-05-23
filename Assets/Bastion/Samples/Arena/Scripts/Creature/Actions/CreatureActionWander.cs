@@ -1,6 +1,4 @@
-﻿using Arena.Creature.Conditions;
-using Bastion.FSM;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Arena.Creature.Actions
 {
@@ -9,8 +7,6 @@ namespace Arena.Creature.Actions
         menuName = "Creature/Action Wander")]
     public class CreatureActionWander : CreatureAction
     {
-        [SerializeField] private CreatureState nextState;
-
         public override void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
@@ -23,7 +19,7 @@ namespace Arena.Creature.Actions
             context.NavMeshAgent.ResetPath();
         }
 
-        public override IState<CreatureContext> Apply(CreatureContext context)
+        public override void Apply(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
@@ -40,13 +36,6 @@ namespace Arena.Creature.Actions
                 var targetPosition = position + targetOffset;
                 context.NavMeshAgent.SetDestination(targetPosition);
             }
-
-            if (CreatureConditionEnemyVisible.CheckStatic(context))
-            {
-                return nextState;
-            }
-
-            return null;
         }
     }
 }

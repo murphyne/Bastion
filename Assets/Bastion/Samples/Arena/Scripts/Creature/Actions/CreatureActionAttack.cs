@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using Arena.Creature.Conditions;
-using Bastion.FSM;
 using UnityEngine;
 
 namespace Arena.Creature.Actions
@@ -10,9 +8,6 @@ namespace Arena.Creature.Actions
         menuName = "Creature/Action Attack")]
     public class CreatureActionAttack : CreatureAction
     {
-        [SerializeField] private CreatureState nextState;
-        [SerializeField] private CreatureState failState;
-
         public override void Enter(CreatureContext context)
         {
             context.StartCoroutine(Animate(context));
@@ -20,25 +15,9 @@ namespace Arena.Creature.Actions
 
         public override void Exit(CreatureContext context) { }
 
-        public override IState<CreatureContext> Apply(CreatureContext context)
+        public override void Apply(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
-
-            if (CreatureConditionIsAnimating.CheckStatic(context))
-            {
-                return null;
-            }
-
-            if (CreatureConditionEnemyDead.CheckStatic(context))
-            {
-                return nextState;
-            }
-            if (CreatureConditionEnemyAlive.CheckStatic(context))
-            {
-                return failState;
-            }
-
-            return null;
         }
 
         private IEnumerator Animate(CreatureContext context)

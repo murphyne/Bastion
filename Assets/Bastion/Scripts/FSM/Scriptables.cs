@@ -52,11 +52,11 @@ namespace Bastion.FSM
         : ScriptableObject, IAction<TContext>
         where TContext : IContext<TContext>
     {
-        IState IAction.Apply(IContext context) => Apply((TContext) context);
+        void IAction.Apply(IContext context) => Apply((TContext) context);
         void IAction.Enter(IContext context) => Enter((TContext) context);
         void IAction.Exit(IContext context) => Exit((TContext) context);
 
-        public abstract IState<TContext> Apply(TContext context);
+        public virtual void Apply(TContext context) { }
         public virtual void Enter(TContext context) { }
         public virtual void Exit(TContext context) { }
     }

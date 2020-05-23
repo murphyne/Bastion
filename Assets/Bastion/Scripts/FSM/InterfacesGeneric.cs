@@ -28,12 +28,13 @@ namespace Bastion.FSM
         where TContext : IContext<TContext>
     {
         new IEnumerable<IAction<TContext>> Actions { get; }
+        new IEnumerable<ITransition<TContext>> Transitions { get; }
     }
 
     public interface IAction<in TContext> : IAction
         where TContext : IContext<TContext>
     {
-        IState<TContext> Apply(TContext context);
+        void Apply(TContext context);
         void Enter(TContext context);
         void Exit(TContext context);
     }
