@@ -1,5 +1,10 @@
-﻿namespace Arena.Creature.Conditions
+﻿using UnityEngine;
+
+namespace Arena.Creature.Conditions
 {
+    [CreateAssetMenu(order = 205,
+        fileName = "CreatureConditionEnemyWithinAttackRange",
+        menuName = "Creature/Condition EnemyWithinAttackRange")]
     public class CreatureConditionEnemyWithinAttackRange : CreatureCondition
     {
         public override bool Check(CreatureContext context)

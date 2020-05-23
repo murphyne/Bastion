@@ -1,5 +1,10 @@
-﻿namespace Arena.Creature.Conditions
+﻿using UnityEngine;
+
+namespace Arena.Creature.Conditions
 {
+    [CreateAssetMenu(order = 202,
+        fileName = "CreatureConditionEnemyBeyondLostRange",
+        menuName = "Creature/Condition EnemyBeyondLostRange")]
     public class CreatureConditionEnemyBeyondLostRange : CreatureCondition
     {
         public override bool Check(CreatureContext context)

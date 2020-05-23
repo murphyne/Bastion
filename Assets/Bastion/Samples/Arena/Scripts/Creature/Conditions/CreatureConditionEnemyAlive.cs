@@ -1,5 +1,10 @@
-﻿namespace Arena.Creature.Conditions
+﻿using UnityEngine;
+
+namespace Arena.Creature.Conditions
 {
+    [CreateAssetMenu(order = 201,
+        fileName = "CreatureConditionEnemyAlive",
+        menuName = "Creature/Condition EnemyAlive")]
     public class CreatureConditionEnemyAlive : CreatureCondition
     {
         public override bool Check(CreatureContext context)

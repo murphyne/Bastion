@@ -1,5 +1,10 @@
-﻿namespace Arena.Creature.Conditions
+﻿using UnityEngine;
+
+namespace Arena.Creature.Conditions
 {
+    [CreateAssetMenu(order = 204,
+        fileName = "CreatureConditionEnemyVisible",
+        menuName = "Creature/Condition EnemyVisible")]
     public class CreatureConditionEnemyVisible : CreatureCondition
     {
         public override bool Check(CreatureContext context)
