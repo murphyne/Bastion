@@ -9,11 +9,6 @@ namespace Arena.Creature.Conditions
     {
         public override bool Check(CreatureContext context)
         {
-            return CheckStatic(context);
-        }
-
-        public static bool CheckStatic(CreatureContext context)
-        {
             var position = context.transform.position;
             var enemyPosition = context.enemy.transform.position;
             var distance = enemyPosition - position;
