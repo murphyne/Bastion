@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062126218f0448ee945c23130759b951, type: 3}
-  m_Name: ActionChase
+  m_Script: {fileID: 11500000, guid: edb3c67d55afd2d4b8b2f553b85cd6c0, type: 3}
+  m_Name: ConditionEnemyAlive
   m_EditorClassIdentifier: 

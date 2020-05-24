@@ -21,12 +21,25 @@ namespace Bastion.FSM
     public interface IStatePluggable : IState
     {
         IEnumerable<IAction> Actions { get; }
+        IEnumerable<ITransition> Transitions { get; }
     }
 
     public interface IAction
     {
-        IState Apply(IContext context);
+        void Apply(IContext context);
         void Enter(IContext context);
         void Exit(IContext context);
+    }
+
+    public interface ICondition
+    {
+        bool Check(IContext context);
+    }
+
+    public interface ITransition
+    {
+        ICondition Condition { get; }
+        IState NextState { get; }
+        IState Check(IContext context);
     }
 }

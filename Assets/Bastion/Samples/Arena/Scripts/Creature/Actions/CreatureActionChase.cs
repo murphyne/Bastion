@@ -1,5 +1,4 @@
-﻿using Bastion.FSM;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Arena.Creature.Actions
 {
@@ -8,9 +7,6 @@ namespace Arena.Creature.Actions
         menuName = "Creature/Action Chase")]
     public class CreatureActionChase : CreatureAction
     {
-        [SerializeField] private CreatureState successState;
-        [SerializeField] private CreatureState failureState;
-
         public override void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
@@ -26,27 +22,12 @@ namespace Arena.Creature.Actions
             context.NavMeshAgent.ResetPath();
         }
 
-        public override IState<CreatureContext> Apply(CreatureContext context)
+        public override void Apply(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
-            var position = context.transform.position;
             var enemyPosition = context.enemy.transform.position;
-            var distance = enemyPosition - position;
-
-            if (distance.sqrMagnitude > context.LostRange * context.LostRange)
-            {
-                return failureState;
-            }
-
-            if (distance.sqrMagnitude < context.AttackRange * context.AttackRange)
-            {
-                return successState;
-            }
-
             context.NavMeshAgent.SetDestination(enemyPosition);
-
-            return null;
         }
     }
 }

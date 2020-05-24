@@ -34,7 +34,9 @@ namespace Arena.Creature
             // Debug.Log($"{this}.{nameof(Update)}()");
 
             var newState = CurrentState?.Handle(context);
-            if (newState != null) SetState(newState);
+            if (newState == null) return;
+            if (ReferenceEquals(newState, currentState)) return;
+            SetState(newState);
         }
     }
 }

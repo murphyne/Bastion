@@ -11,9 +11,13 @@ namespace Arena.Creature
         IStatePluggable<CreatureContext>
     {
         IEnumerable<IAction> IStatePluggable.Actions => actions;
+        IEnumerable<ITransition> IStatePluggable.Transitions => transitions;
 
         public IEnumerable<IAction<CreatureContext>> Actions => actions;
         [SerializeField] private CreatureAction[] actions;
+
+        public IEnumerable<ITransition<CreatureContext>> Transitions => transitions;
+        [SerializeField] private CreatureTransition[] transitions;
 
         public override IState<CreatureContext> Handle(CreatureContext context)
         {
@@ -21,7 +25,12 @@ namespace Arena.Creature
 
             foreach (var action in Actions)
             {
-                var newState = action?.Apply(context);
+                action?.Apply(context);
+            }
+
+            foreach (var transition in Transitions)
+            {
+                var newState = transition?.Check(context);
 
                 if (newState != null)
                 {

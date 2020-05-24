@@ -52,12 +52,39 @@ namespace Bastion.FSM
         : ScriptableObject, IAction<TContext>
         where TContext : IContext<TContext>
     {
-        IState IAction.Apply(IContext context) => Apply((TContext) context);
+        void IAction.Apply(IContext context) => Apply((TContext) context);
         void IAction.Enter(IContext context) => Enter((TContext) context);
         void IAction.Exit(IContext context) => Exit((TContext) context);
 
-        public abstract IState<TContext> Apply(TContext context);
+        public virtual void Apply(TContext context) { }
         public virtual void Enter(TContext context) { }
         public virtual void Exit(TContext context) { }
+    }
+
+    public abstract class ScriptableCondition<TContext>
+        : ScriptableObject, ICondition<TContext>
+        where TContext : IContext<TContext>
+    {
+        bool ICondition.Check(IContext context) => Check((TContext) context);
+
+        public abstract bool Check(TContext context);
+    }
+
+    public abstract class ScriptableTransition<TContext>
+        : ITransition<TContext>
+        where TContext : IContext<TContext>
+    {
+        ICondition ITransition.Condition => Condition;
+        IState ITransition.NextState => NextState;
+        IState ITransition.Check(IContext context) => Check((TContext) context);
+
+        public abstract ICondition<TContext> Condition { get; }
+        public abstract IState<TContext> NextState { get; }
+
+        public virtual IState<TContext> Check(TContext context)
+        {
+            var success = Condition != null && Condition.Check(context);
+            return success ? NextState : null;
+        }
     }
 }

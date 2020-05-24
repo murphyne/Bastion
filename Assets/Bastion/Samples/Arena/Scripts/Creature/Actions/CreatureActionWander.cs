@@ -1,5 +1,4 @@
-﻿using Bastion.FSM;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Arena.Creature.Actions
 {
@@ -8,8 +7,6 @@ namespace Arena.Creature.Actions
         menuName = "Creature/Action Wander")]
     public class CreatureActionWander : CreatureAction
     {
-        [SerializeField] private CreatureState nextState;
-
         public override void Enter(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Enter)}({context})");
@@ -22,7 +19,7 @@ namespace Arena.Creature.Actions
             context.NavMeshAgent.ResetPath();
         }
 
-        public override IState<CreatureContext> Apply(CreatureContext context)
+        public override void Apply(CreatureContext context)
         {
             // Debug.Log($"{this}.{nameof(Apply)}({context})");
 
@@ -39,32 +36,6 @@ namespace Arena.Creature.Actions
                 var targetPosition = position + targetOffset;
                 context.NavMeshAgent.SetDestination(targetPosition);
             }
-
-            var colliders = Physics.OverlapSphere(position,
-                context.SearchRange, context.SearchLayer);
-            foreach (var collider in colliders)
-            {
-                // Ignore itself.
-                if (collider.gameObject == context.gameObject) continue;
-
-                var colliderPosition = collider.transform.position;
-                var distance = colliderPosition - position;
-
-                // Ignore objects beyond field of view.
-                var angle = Vector3.Angle(context.transform.forward, distance);
-                if (angle > context.FieldOfView / 2) continue;
-
-                // Ignore objects without required context component.
-                Physics.Raycast(position, distance, out var hit);
-                var creatureContext =
-                    hit.collider.gameObject.GetComponent<CreatureContext>();
-                if (!creatureContext) continue;
-
-                context.enemy = creatureContext;
-                return nextState;
-            }
-
-            return null;
         }
     }
 }
