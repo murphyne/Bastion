@@ -19,6 +19,47 @@ namespace Bastion.FSM
         public virtual void Exit(TContext context) { }
     }
 
+    public abstract class ProxyAgent<TContext>
+        : MonoBehaviour, IAgent<TContext>
+        where TContext : IContext<TContext>
+    {
+        IContext IAgent.Context => _agent.Context;
+        IState IAgent.CurrentState => _agent.CurrentState;
+        void IAgent.SetState(IState newState) =>
+            SetState((IState<TContext>) newState);
+
+        public IAgent<TContext> Agent
+        {
+            get => _agent;
+            set => _agent = value;
+        }
+
+        [SerializeField] private IAgent<TContext> _agent;
+
+        public TContext Context => _agent.Context;
+
+        public IState<TContext> CurrentState => _agent.CurrentState;
+
+        public void SetState(IState<TContext> newState)
+        {
+            _agent.SetState(newState);
+        }
+
+        protected virtual void Start()
+        {
+            SetState(CurrentState);
+        }
+
+        protected virtual void Update()
+        {
+            var newState = CurrentState?.Handle(Context);
+            if (newState != null)
+            {
+                SetState(newState);
+            }
+        }
+    }
+
     public abstract class MonoAgent<TContext>
         : MonoBehaviour, IAgent<TContext>
         where TContext : IContext<TContext>
