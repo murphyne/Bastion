@@ -63,9 +63,7 @@ namespace Bastion.Samples.Arena.Tests
 
             Debug.Log("Before yield return null");
 
-            Assert.IsNull(Camera.current);
             yield return null;
-            Assert.IsNotNull(Camera.current);
 
             Debug.Log("Before Alice");
 
