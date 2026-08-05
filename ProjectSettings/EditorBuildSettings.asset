@@ -9,3 +9,4 @@ EditorBuildSettings:
     path: Assets/Bastion/Samples/Arena/Scenes/SampleScene.unity
     guid: d9c6020205494e047b75b7bd77434ef8
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
